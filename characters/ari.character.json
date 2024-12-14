@@ -1,5 +1,6 @@
 {
     "name": "Ari",
+    "plugins": [],
     "clients": ["telegram", "twitter"],
     "modelProvider": "openai",
     "settings": {
