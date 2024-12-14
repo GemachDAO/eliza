@@ -1,6 +1,6 @@
 {
     "name": "Ari",
-    "clients": ["telegram", "twitter", "direct"],
+    "clients": ["telegram", "twitter"],
     "modelProvider": "openai",
     "settings": {
       "secrets": {},
