@@ -1,6 +1,6 @@
 # Token Trending Plugin
 
-A comprehensive plugin for tracking and analyzing cryptocurrency trends using multiple data sources.
+A comprehensive plugin for tracking and analyzing cryptocurrency trends, tokens, and liquidity pools using multiple data sources.
 
 ## Features
 
@@ -8,6 +8,8 @@ A comprehensive plugin for tracking and analyzing cryptocurrency trends using mu
 - Global cryptocurrency market statistics
 - Exchange information and rankings
 - Real-time token price checking
+- Token security analysis and risk assessment
+- Liquidity pool analytics and tracking
 - Rate-limit compliant API calls
 
 ## Installation
@@ -64,6 +66,38 @@ const agent = new AgentRuntime({
 "Show me the price of SOL in EUR";
 ```
 
+### 5. Check Token Security
+
+```typescript
+// Analyze token security and risks
+"Check security for token 0x1234... on Ethereum";
+"Is this token safe? 0x5678... on BSC";
+```
+
+### 6. Get Trending Pools
+
+```typescript
+// Get trending liquidity pools
+"Show me trending pools across all networks";
+"What are the hot pools on Ethereum?";
+```
+
+### 7. Get Latest Pools
+
+```typescript
+// Get newest liquidity pools
+"Show me the latest pools on BSC";
+"What are the newest pools across all networks?";
+```
+
+### 8. Get Top TVL Pools
+
+```typescript
+// Get pools with highest Total Value Locked
+"Show me top TVL pools on Ethereum";
+"What are the biggest pools on Avalanche?";
+```
+
 ## Data Sources
 
 ### CoinGecko
@@ -79,10 +113,55 @@ const agent = new AgentRuntime({
 - Chain-specific trending data
 - Token metadata and links
 
+### GoPlus Security
+
+- Contract security analysis
+- Risk assessment
+- Holder analysis
+- Trading security checks
+
+### GeckoTerminal
+
+- Liquidity pool data
+- Pool analytics
+- Network-specific pool trends
+- New pool listings
+
+### DefiLlama
+
+- TVL rankings
+- Pool performance metrics
+- Cross-chain analytics
+
+## Security Analysis Features
+
+The security check provides comprehensive analysis including:
+
+- Contract verification status
+- Honeypot detection
+- Ownership analysis
+- Trading restrictions
+- DEX presence
+- Holder distribution
+- Risk level assessment
+- Security recommendations
+
+Supported Networks:
+
+- Ethereum (Chain ID: 1)
+- BSC (Chain ID: 56)
+- Polygon (Chain ID: 137)
+- Arbitrum (Chain ID: 42161)
+- Optimism (Chain ID: 10)
+- Avalanche (Chain ID: 43114)
+
 ## Rate Limits
 
 - CoinGecko: Standard API rate limits apply
 - DexScreener: 60 requests per minute
+- GoPlus Security: Standard API rate limits apply
+- GeckoTerminal: Standard API rate limits apply
+- DefiLlama: Standard API rate limits apply
 
 ## Dependencies
 
