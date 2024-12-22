@@ -1,0 +1,22 @@
+{
+    "name": "@ai16z/plugin-token-trending",
+    "version": "0.1.6-alpha.4",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsup src/index.ts --format esm --dts",
+        "dev": "tsup src/index.ts --format esm --watch",
+        "clean": "rimraf dist"
+    },
+    "dependencies": {
+        "@ai16z/eliza": "workspace:*",
+        "axios": "^1.6.7",
+        "coingecko-api-v3": "^0.0.29"
+    },
+    "devDependencies": {
+        "tsup": "^8.0.2",
+        "typescript": "^5.3.3",
+        "rimraf": "^5.0.5"
+    }
+}
