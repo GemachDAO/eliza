@@ -159,6 +159,9 @@ importers:
       '@ai16z/plugin-goat':
         specifier: workspace:*
         version: link:../packages/plugin-goat
+      '@ai16z/plugin-google-search':
+        specifier: workspace:*
+        version: link:../packages/plugin-google-search
       '@ai16z/plugin-icp':
         specifier: workspace:*
         version: link:../packages/plugin-icp
@@ -1115,6 +1118,28 @@ importers:
       whatwg-url:
         specifier: 7.1.0
         version: 7.1.0
+
+  packages/plugin-google-search:
+    dependencies:
+      '@ai16z/eliza':
+        specifier: workspace:*
+        version: link:../core
+      axios:
+        specifier: ^1.6.7
+        version: 1.7.9(debug@4.4.0)
+      cheerio:
+        specifier: ^1.0.0-rc.12
+        version: 1.0.0-rc.12
+    devDependencies:
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      tsup:
+        specifier: ^8.0.2
+        version: 8.3.5(@swc/core@1.10.1(@swc/helpers@0.5.15))(jiti@2.4.1)(postcss@8.4.49)(typescript@5.6.3)(yaml@2.6.1)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.6.3
 
   packages/plugin-icp:
     dependencies:

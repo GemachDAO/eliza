@@ -8,6 +8,7 @@ import { SlackClientInterface } from "@ai16z/client-slack";
 import { TelegramClientInterface } from "@ai16z/client-telegram";
 import { TwitterClientInterface } from "@ai16z/client-twitter";
 import { tokenTrendingPlugin } from "@ai16z/plugin-token-trending";
+import { googleSearchPlugin } from "@ai16z/plugin-google-search";
 import {
     AgentRuntime,
     CacheManager,
@@ -484,6 +485,10 @@ export async function createAgent(
         plugins: [
             bootstrapPlugin,
             tokenTrendingPlugin,
+            getSecret(character, "GOOGLE_API_KEY") &&
+            getSecret(character, "SEARCH_ENGINE_ID")
+                ? googleSearchPlugin
+                : null,
             getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")
                 ? confluxPlugin
                 : null,

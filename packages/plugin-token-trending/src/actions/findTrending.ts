@@ -6,13 +6,13 @@ import {
     Memory,
     State,
     composeContext,
-    // generateObject,
     ModelClass,
     generateObjectDeprecated,
 } from "@ai16z/eliza";
 import { CoinGeckoClient } from "coingecko-api-v3";
 import axios from "axios";
 import { elizaLogger } from "@ai16z/eliza";
+
 interface TrendingTokenParams {
     chain?: string;
     timeframe?: string;
@@ -1253,8 +1253,6 @@ export const getTrendingTokensOnChain: Action = {
     ],
 };
 
-
-
 function getILRiskEmoji(risk: string): string {
     switch (risk.toLowerCase()) {
         case "no":
@@ -1278,7 +1276,7 @@ function formatTVLPoolsResponse(pools: PoolData[]): string {
     }
 
     return (
-        `💰 Top Pools by TVL:\n\n` +
+        ` Top Pools by TVL:\n\n` +
         pools
             .slice(0, 10)
             .map((pool, index) => {
@@ -1321,7 +1319,7 @@ function formatTVLPoolsResponse(pools: PoolData[]): string {
 async function getToPoolByTVL(args: { chain: string }): Promise<PoolData[]> {
     try {
         const response = await axiosYieldInstance.get(`/pools`);
-        const data = response.data.data
+        const data = response.data.data;
         const result = data.filter((pool: any) => pool.chain === args.chain);
         const top50Pools = result
             .sort((a: any, b: any) => b.tvlUsd - a.tvlUsd)
