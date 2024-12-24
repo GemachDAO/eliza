@@ -733,17 +733,16 @@ export const getSimplePrice: Action = {
                 type: "processing",
             });
         }
-
+        console.log("Message ", message);
+        console.log("State ", state);
         // Initialize or update state
-        if (!state) {
-            state = (await runtime.composeState(message)) as State;
-        } else {
-            state = await runtime.updateRecentMessageState(state);
-        }
-
-        const context = composeContext({
-            state,
-            template: `Extract coin IDs and vs_currencies from the message:
+        // if (!state) {
+        //     state = (await runtime.composeState(message)) as State;
+        // } else {
+        //     state = await runtime.updateRecentMessageState(state);
+        // }
+        // TODO: handle the case where the agent doesnt know the coin ids
+        const context = `Extract coin IDs from the last user message:
 Example response:
 \`\`\`json
 {
@@ -751,12 +750,11 @@ Example response:
     "vs_currencies": ["usd", "eur"]
 }
 \`\`\`
-{{recentMessages}}
+${message.content.text}
 Extract:
 - Coin IDs (lowercase)
 - VS currencies (lowercase)
-`,
-        });
+`;
 
         const params = await generateObjectDeprecated({
             runtime,
@@ -782,7 +780,7 @@ Extract:
                 });
             }
 
-            return true;
+            return priceData;
         } catch (error: any) {
             if (callback) {
                 callback({
@@ -865,12 +863,13 @@ function formatPriceResponse(prices: {
 
 export const checkTokenSecurity: Action = {
     name: "CHECK_TOKEN_SECURITY",
-    description: "Check token security information using GoPlus Security API",
+    description: "Check token security-safety information using GoPlus Security API",
     similes: [
         "TOKEN_SECURITY",
         "SECURITY_CHECK",
         "VERIFY_TOKEN",
         "TOKEN_AUDIT",
+        "CHECK_TOKEN_SAFETY",
     ],
     validate: async (runtime: IAgentRuntime, _message: Memory) => {
         return true;
@@ -894,10 +893,7 @@ export const checkTokenSecurity: Action = {
         } else {
             state = await runtime.updateRecentMessageState(state);
         }
-
-        const context = composeContext({
-            state,
-            template: `Extract chain ID and token address from the message:
+        const context = `Extract chain ID and token address from the message:
 Example response:
 \`\`\`json
 {
@@ -906,24 +902,56 @@ Example response:
 }
 \`\`\`
 Chain IDs:
-1: Ethereum
-56: BSC
-137: Polygon
-42161: Arbitrum
-10: Optimism
-43114: Avalanche
-{{recentMessages}}
-Extract:
-- Chain ID (number as string)
-- Token address (full address)
-`,
-        });
+1:Ethereum
+56:BSC
+42161:Arbitrum
+137:Polygon
+solana:Solana
+204:opBNB
+324:zkSync Era
+59144:Linea Mainnet
+8453:Base
+5000:Mantle
+534352:Scroll
+10:Optimism
+43114:Avalanche
+250:Fantom
+25:Cronos
+128:HECO
+100:Gnosis
+tron:Tron
+321:KCC
+201022:FON
+42766:ZKFair
+81457:Blast
+169:Manta Pacific
+80085:Berachain Artio Testnet
+4200:Merlin
+200901:Bitlayer Mainnet
+810180:zkLink Nova
+196:X Layer Mainnet
+48899:Zircuit
+185:Mint
 
+${message.content.text}
+Extract:
+- Chain ID (number as string) if not mentioned, return "missing"
+- Token address (full address)
+`;
         const params = await generateObjectDeprecated({
             runtime,
             context,
             modelClass: ModelClass.SMALL,
         });
+        if (params.chainId === "missing") {
+            if (callback) {
+                callback({
+                    text: "❌ Chain ID is missing. Please provide a valid chain ID.",
+                    type: "error",
+                });
+            }
+            return false;
+        }
 
         try {
             const securityInfo = await getTokenSecurity(
