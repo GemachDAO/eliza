@@ -452,6 +452,7 @@ export const findTrendingTokens: Action = {
         "ALL_CHAINS_TRENDING",
         "CROSS_CHAIN_TRENDING",
         "GLOBAL_TOKEN_TRENDS",
+        "FIND_TRENDING_TOKENS"
     ],
     validate: async (runtime: IAgentRuntime, _message: Memory) => {
         return true;
@@ -543,7 +544,7 @@ export const findTrendingTokens: Action = {
                 user: "{{user2}}",
                 content: {
                     text: "Here are the trending tokens on Ethereum...",
-                    action: "FIND_TRENDING_TOKENS",
+                    action: "GET_GLOBAL_TRENDING_TOKENS",
                 },
             },
         ],
